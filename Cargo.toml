@@ -12,3 +12,6 @@ riscv = "0.6.0"
 riscv-rt = "0.8.0"
 panic-halt = "0.2.0"
 max3010x = "0.1.0"
+embedded-graphics = "0.6"
+heapless = "0.5"
+longan-nano = { version = "0.2", features = ["lcd"] }
