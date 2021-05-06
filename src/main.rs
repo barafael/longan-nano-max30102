@@ -88,7 +88,7 @@ fn main() -> ! {
     sensor.set_sample_averaging(SampleAveraging::Sa8).unwrap();
     sensor.set_pulse_amplitude(Led::All, 15).unwrap();
     sensor.enable_fifo_rollover().unwrap();
-    sensor.set_sampling_rate(SamplingRate::Sps100).unwrap();
+    sensor.set_sampling_rate(SamplingRate::Sps1000).unwrap();
     sensor.set_pulse_width(LedPulseWidth::Pw411).unwrap();
 
     sensor.clear_fifo().unwrap();
@@ -104,7 +104,7 @@ fn main() -> ! {
         .unwrap();
 
     loop {
-        delay.delay_ms(100u8);
+        delay.delay_ms(10u32);
         let mut buf = String::<heapless_100>::new();
         let mut data = [0; 16];
         let samples_read = sensor.read_fifo(&mut data).unwrap_or(0);
@@ -114,7 +114,7 @@ fn main() -> ! {
             / 1000u32;
         let _ = write!(buf, "value: {}: {}", samples_read, data[0]);
 
-        Text::new("        ", Point::new(2, 32))
+        Text::new("          ", Point::new(2, 32))
             .into_styled(style)
             .draw(&mut lcd)
             .unwrap();
